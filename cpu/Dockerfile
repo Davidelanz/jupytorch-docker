@@ -1,10 +1,17 @@
+
+
+
+FROM ubuntu:18.04
+
 ARG PYTHON_VERSION=3.7
 # To decide which pytorch and cuda version, please checkout this link:
 # https://anaconda.org/pytorch/repo
 ARG PYTORCH_VERSION=1.8.1
 
 
-FROM ubuntu:18.04
+
+
+
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
          build-essential \
@@ -28,29 +35,29 @@ RUN wget -q https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.s
 
 # Create pytorch environment
 RUN  /opt/conda/bin/conda install conda-build && \
-     /opt/conda/bin/conda create -y --name pytorch-py$PYTHON_VERSION python=$PYTHON_VERSION numpy pyyaml scipy ipython mkl && \
+     /opt/conda/bin/conda create -y --name pytorch-py${PYTHON_VERSION} python=${PYTHON_VERSION} numpy pyyaml scipy ipython mkl && \
      /opt/conda/bin/conda clean -ya
-ENV PATH opt/conda/bin:/opt/conda/envs/pytorch-py$PYTHON_VERSION/bin:$PATH
-RUN conda install --name pytorch-py$PYTHON_VERSION pytorch=$PYTORCH_VERSION torchvision torchaudio cpuonly -c pytorch
+ENV PATH opt/conda/bin:/opt/conda/envs/pytorch-py${PYTHON_VERSION}/bin:$PATH
+RUN conda install --name pytorch-py${PYTHON_VERSION} pytorch=${PYTORCH_VERSION} torchvision torchaudio cpuonly -c pytorch
 
 # Add env as default env activated by bash
 RUN echo "source /opt/conda/bin/activate" >> ~/.bashrc && \
-    echo "conda activate pytorch-py$PYTHON_VERSION" >> ~/.bashrc
+    echo "conda activate pytorch-py${PYTHON_VERSION}" >> ~/.bashrc
 
 # Install OpenCV-related
-RUN conda install --name pytorch-py$PYTHON_VERSION ffmpeg matplotlib opencv
-RUN conda install --name pytorch-py$PYTHON_VERSION lxml -c anaconda
+RUN conda install --name pytorch-py${PYTHON_VERSION} ffmpeg matplotlib opencv
+RUN conda install --name pytorch-py${PYTHON_VERSION} lxml -c anaconda
 
 # Install flask, pandas & other useful stuff
-RUN /opt/conda/envs/pytorch-py$PYTHON_VERSION/bin/pip install easydict ffmpy imutils requests flask onnx seaborn pandas
+RUN /opt/conda/envs/pytorch-py${PYTHON_VERSION}/bin/pip install easydict ffmpy imutils requests flask onnx seaborn pandas
 
 # Install Jupyter and Node.js (for jupyter extensions)
-RUN conda install --name pytorch-py$PYTHON_VERSION --yes ipython notebook jupyter jupyterlab && conda clean -ya
-RUN conda install --name pytorch-py$PYTHON_VERSION nodejs -c conda-forge --repodata-fn=repodata.json
-RUN conda install --name pytorch-py$PYTHON_VERSION jupyter_contrib_nbextensions -c conda-forge 
+RUN conda install --name pytorch-py${PYTHON_VERSION} --yes ipython notebook jupyter jupyterlab && conda clean -ya
+RUN conda install --name pytorch-py${PYTHON_VERSION} nodejs -c conda-forge --repodata-fn=repodata.json
+RUN conda install --name pytorch-py${PYTHON_VERSION} jupyter_contrib_nbextensions -c conda-forge 
 # Install jupyterlab_code_formatter
-RUN conda install --name pytorch-py$PYTHON_VERSION jupyterlab_code_formatter -c conda-forge 
-RUN conda install --name pytorch-py$PYTHON_VERSION black isort -c conda-forge 
+RUN conda install --name pytorch-py${PYTHON_VERSION} jupyterlab_code_formatter -c conda-forge 
+RUN conda install --name pytorch-py${PYTHON_VERSION} black isort -c conda-forge 
 RUN jupyter labextension enable jupyterlab_code_formatter
 
 EXPOSE 8888
@@ -59,4 +66,4 @@ WORKDIR /workspace
 RUN chmod -R a+w /workspace
 
 ENV JUPYTER_COMMAND "jupyter lab --ip=0.0.0.0 --port=8888 --no-browser --allow-root --ServerApp.token='' --ServerApp.terminado_settings={'shell_command':['bash']}"
-CMD $JUPYTER_COMMAND
+CMD ${JUPYTER_COMMAND}

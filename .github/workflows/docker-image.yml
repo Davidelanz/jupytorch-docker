@@ -41,6 +41,7 @@ jobs:
     runs-on: ubuntu-latest
     name: GPU
     strategy:
+      fail-fast: false
       matrix:
         include:
           # CUDA 10
