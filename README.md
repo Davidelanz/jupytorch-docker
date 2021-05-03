@@ -14,12 +14,12 @@ It provides a quick set up for Pytorch and Jupyter Lab with Docker.
 > The image supports [nbdev](https://nbdev.fast.ai/) paradigm (by fast.ai), 
 > allowing you to develop python libraries directly in Jupyter Notebooks:
 >
-> ![](https://raw.githubusercontent.com/Davidelanz/jupytorch-docker/d779bb74b6c4b87f07f1f14080199684744ed2f2/.docs/nbdev.png)
+> ![](https://raw.githubusercontent.com/Davidelanz/jupytorch-docker/master/.docs/nbdev.png)
 
 <!--img src="https://raw.githubusercontent.com/psf/black/master/docs/_static/logo2-readme.png" width="100" /-->
 > JupyterLab comes with [jupyterlab_code_formatter](https://jupyterlab-code-formatter.readthedocs.io/)  already installed:
 >
-> ![](https://raw.githubusercontent.com/Davidelanz/jupytorch-docker/d779bb74b6c4b87f07f1f14080199684744ed2f2/.docs/formatter.png)
+> ![](https://raw.githubusercontent.com/Davidelanz/jupytorch-docker/master/.docs/formatter.png)
 
 
 
