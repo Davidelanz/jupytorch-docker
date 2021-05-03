@@ -1,11 +1,11 @@
 # Jupytorch | Docker image enabled with Pytorch and Jupyter
 
 [![Docker Image CI](https://github.com/Davidelanz/jupytorch-docker/actions/workflows/docker-image.yml/badge.svg)](https://github.com/Davidelanz/jupytorch-docker/actions/workflows/docker-image.yml)
-![https://releases.ubuntu.com/20.04/](https://img.shields.io/badge/Ubuntu-20.04-orange)
-![https://www.python.org/downloads/release/python-370/](https://img.shields.io/badge/Python-3.7-yellow)
-![https://github.com/pytorch/pytorch/releases/tag/v1.8.1](https://img.shields.io/badge/PyTorch-1.8.1-green)
-![#](https://img.shields.io/badge/CPU_only-yes-green)
-![#](https://img.shields.io/badge/CUDA-10.0%7C10.1%7C10.2%7C11.0-green)
+[![](https://img.shields.io/badge/Ubuntu-20.04-orange)](https://releases.ubuntu.com/20.04/)
+[![](https://img.shields.io/badge/Python-3.7-yellow)](https://www.python.org/downloads/release/python-370/)
+[![](https://img.shields.io/badge/PyTorch-1.8.1-green)](https://github.com/pytorch/pytorch/releases/tag/v1.8.1)
+[![](https://img.shields.io/badge/CPU_only-yes-green)](#)
+[![](https://img.shields.io/badge/CUDA-10.0%7C10.1%7C10.2%7C11.0-green)](#)
 
 Repository for the [davidelanz/jupytorch](https://hub.docker.com/r/davidelanz/jupytorch) docker image. 
 It provides a quick set up for Pytorch and Jupyter Lab with Docker.
