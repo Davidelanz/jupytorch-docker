@@ -18,7 +18,7 @@ It provides a quick set up for Pytorch and Jupyter Lab with Docker.
 ## Mount from DockerHub
 
 Download the image from [davidelanz/jupytorch](https://hub.docker.com/r/davidelanz/jupytorch), 
-then mount the container (the image exposes JupyterLan on the 8888 port):
+then mount the container (the image exposes JupyterLab on the ``8888`` port):
 ```
 docker run -p CONTANER_PORT:8888 -v EXTERNAL_FOLDER:/workspace --name CONTAINER_NAME davidelanz/jupytorch:TAG
 ```
