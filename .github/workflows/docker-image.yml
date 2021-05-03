@@ -1,0 +1,56 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  PushReadmeJob:
+    runs-on: ubuntu-latest
+    name: Push README to Docker Hub
+    steps:
+      - name: git checkout
+        uses: actions/checkout@v2
+      - name: push README to Dockerhub
+        uses: christian-korneck/update-container-description-action@v1
+        env:
+          DOCKER_USER: davidelanz
+          DOCKER_PASS: ${{ secrets.DOCKER_PASSWORD }}
+        with:
+          destination_container_repo: davidelanz/jupytorch
+          provider: dockerhub
+          short_description: "Quickly set up Pytorch and Jupyter Lab"
+          readme_file: "README.md"
+
+  BuildPushCPU:
+    runs-on: ubuntu-latest
+    name: CPU
+    steps:
+      - name: git checkout
+        uses: actions/checkout@v2
+
+      - name: Build and push CPU image
+        env:
+          DOCKER_USER: davidelanz
+          DOCKER_PASS: ${{ secrets.DOCKER_PASSWORD }}
+        run: docker login -u $DOCKER_USER -p $DOCKER_PASS && 
+             docker build . --file cpu/Dockerfile --tag davidelanz/jupytorch:cpu && 
+             docker push davidelanz/jupytorch:cpu
+
+  BuildPushGPU:
+    runs-on: ubuntu-latest
+    name: GPU
+    strategy:
+      matrix:
+        cuda: [10.0, 10.1, 10.2, 11.0] # ${{ matrix.cuda }}
+    steps:
+      - name: git checkout
+        uses: actions/checkout@v2
+
+      - name: Build and push GPU images
+        env:
+          DOCKER_USER: davidelanz
+          DOCKER_PASS: ${{ secrets.DOCKER_PASSWORD }}
+        run: docker login -u $DOCKER_USER -p $DOCKER_PASS &&
+             docker build . --build-arg PYTORCH_CUDA_VERSION=cuda${{ matrix.cuda }} --file cpu/Dockerfile --tag davidelanz/jupytorch:gpu-cuda${{ matrix.cuda }} && 
+             docker push davidelanz/jupytorch:gpu-cuda${{ matrix.cuda }}
