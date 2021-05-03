@@ -13,8 +13,6 @@ ARG CUDA_VERSION
 ARG CUDNN_VERSION
 ARG CUDA_TOOLKIT=CUDA_VERSION
 
-WORKDIR /workspace
-
 RUN apt-get update && apt-get install -y --no-install-recommends \
          build-essential \
          git \
@@ -67,6 +65,7 @@ RUN conda install --name pytorch-py${PYTHON_VERSION} nbdev -c fastai
 RUN git clone https://github.com/fastai/nbdev_template.git /workspace/nbdev_template
 
 EXPOSE 8888
+WORKDIR /workspace
 RUN chmod -R a+w /workspace
 
 ENV JUPYTER_COMMAND "jupyter lab --ip=0.0.0.0 --port=8888 --no-browser --allow-root --ServerApp.token='' --ServerApp.terminado_settings={'shell_command':['bash']}"
