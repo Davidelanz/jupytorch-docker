@@ -1,4 +1,11 @@
-FROM ubuntu:20.04
+ARG PYTHON_VERSION=3.7
+# To decide which pytorch and cuda version, please checkout this link:
+# https://anaconda.org/pytorch/repo
+ARG PYTORCH_VERSION=1.8.1
+
+
+FROM ubuntu:18.04
+
 RUN apt-get update && apt-get install -y --no-install-recommends \
          build-essential \
          git \
@@ -12,11 +19,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
          htop \
          unzip \
          wget
-
-ARG PYTHON_VERSION=3.7
-# To decide which pytorch and cuda version, please checkout this link:
-# https://anaconda.org/pytorch/repo
-ARG PYTORCH_VERSION=1.8.1
 
 # Install conda
 RUN wget -q https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda.sh  && \

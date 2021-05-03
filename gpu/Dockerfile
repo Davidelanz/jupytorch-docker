@@ -1,5 +1,12 @@
-FROM ubuntu:20.04
-LABEL com.nvidia.volumes.needed="nvidia_driver"
+ARG PYTHON_VERSION=3.7
+# To decide which pytorch and cuda version, please checkout this link:
+# https://anaconda.org/pytorch/repo
+ARG PYTORCH_VERSION=1.8.1
+ARG CUDA_VERSION=10.1
+ARG CUDNN_VERSION=7
+
+FROM nvidia/cuda:${CUDA_VERSION}-cudnn${CUDNN_VERSION}-devel-ubuntu18.04
+
 RUN apt-get update && apt-get install -y --no-install-recommends \
          build-essential \
          git \
@@ -14,12 +21,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
          unzip \
          wget
 
-ARG PYTHON_VERSION=3.7
-# To decide which pytorch and cuda version, please checkout this link:
-# https://anaconda.org/pytorch/repo
-ARG PYTORCH_VERSION=1.8.1
-ARG PYTORCH_CUDA_VERSION=10.1
-
 # Install conda
 RUN wget -q https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda.sh  && \
      chmod +x ~/miniconda.sh && \
@@ -31,16 +32,11 @@ RUN  /opt/conda/bin/conda install conda-build && \
      /opt/conda/bin/conda create -y --name pytorch-py$PYTHON_VERSION python=$PYTHON_VERSION numpy pyyaml scipy ipython mkl && \
      /opt/conda/bin/conda clean -ya
 ENV PATH opt/conda/bin:/opt/conda/envs/pytorch-py$PYTHON_VERSION/bin:$PATH
-RUN conda install --name pytorch-py$PYTHON_VERSION pytorch=$PYTORCH_VERSION torchvision torchaudio cudatoolkit=$PYTORCH_CUDA_VERSION -c pytorch
+RUN conda install --name pytorch-py$PYTHON_VERSION pytorch=$PYTORCH_VERSION torchvision torchaudio cudatoolkit=$CUDA_VERSION -c pytorch
 
 # Add env as default env activated by bash
 RUN echo "source /opt/conda/bin/activate" >> ~/.bashrc && \
     echo "conda activate pytorch-py$PYTHON_VERSION" >> ~/.bashrc
-
-
-ENV NVIDIA_VISIBLE_DEVICES all
-ENV NVIDIA_DRIVER_CAPABILITIES compute,utility
-ENV LD_LIBRARY_PATH /usr/local/nvidia/lib:/usr/local/nvidia/lib64
 
 # Install OpenCV-related
 RUN conda install --name pytorch-py$PYTHON_VERSION ffmpeg matplotlib opencv
