@@ -65,5 +65,9 @@ EXPOSE 8888
 WORKDIR /workspace
 RUN chmod -R a+w /workspace
 
+# Install nbdev and add nbdev template to workspace
+RUN conda install --name pytorch-py${PYTHON_VERSION} nbdev -c fastai
+RUN git clone https://github.com/fastai/nbdev_template.git /workspace/nbdev_template
+
 ENV JUPYTER_COMMAND "jupyter lab --ip=0.0.0.0 --port=8888 --no-browser --allow-root --ServerApp.token='' --ServerApp.terminado_settings={'shell_command':['bash']}"
 CMD ${JUPYTER_COMMAND}
