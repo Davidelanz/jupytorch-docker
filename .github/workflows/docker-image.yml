@@ -42,7 +42,7 @@ jobs:
     name: GPU
     strategy:
       matrix:
-        cuda: [10.0, 10.1, 10.2, 11.0] # ${{ matrix.cuda }}
+        cuda: ['10.0', '10.1', '10.2', '11.0'] # ${{ matrix.cuda }}
     steps:
       - name: git checkout
         uses: actions/checkout@v2
