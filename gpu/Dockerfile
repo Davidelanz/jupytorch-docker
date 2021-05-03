@@ -51,7 +51,12 @@ RUN /opt/conda/envs/pytorch-py$PYTHON_VERSION/bin/pip install easydict ffmpy imu
 
 # Install Jupyter and Node.js (for jupyter extensions)
 RUN conda install --name pytorch-py$PYTHON_VERSION --yes ipython notebook jupyter jupyterlab && conda clean -ya
-RUN conda install -c conda-forge nodejs
+RUN conda install --name pytorch-py$PYTHON_VERSION nodejs -c conda-forge --repodata-fn=repodata.json
+RUN conda install --name pytorch-py$PYTHON_VERSION jupyter_contrib_nbextensions -c conda-forge 
+# Install jupyterlab_code_formatter
+RUN conda install --name pytorch-py$PYTHON_VERSION jupyterlab_code_formatter -c conda-forge 
+RUN conda install --name pytorch-py$PYTHON_VERSION black isort -c conda-forge 
+RUN jupyter labextension enable jupyterlab_code_formatter
 
 EXPOSE 8888
 
