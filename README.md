@@ -40,10 +40,6 @@ Available tags:
 - ``gpu-cuda10.2-cudnn7``
 - ``gpu-cuda10.2-cudnn8``
 - ``gpu-cuda11.1.1-cudnn8``
-<!--
-- ``gpu-cuda11.2.2-cudnn8`` (experimental)
-- ``gpu-cuda11.3.0-cudnn8`` (experimental)
--->
 
 ## Build Custom CPU version from GitHub
 
