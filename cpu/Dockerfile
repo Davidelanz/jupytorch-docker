@@ -13,6 +13,8 @@ ARG PYTORCH_VERSION=1.8.1
 
 
 
+WORKDIR /workspace
+
 RUN apt-get update && apt-get install -y --no-install-recommends \
          build-essential \
          git \
@@ -60,14 +62,12 @@ RUN conda install --name pytorch-py${PYTHON_VERSION} jupyterlab_code_formatter -
 RUN conda install --name pytorch-py${PYTHON_VERSION} black isort -c conda-forge 
 RUN jupyter labextension enable jupyterlab_code_formatter
 
-EXPOSE 8888
-
-WORKDIR /workspace
-RUN chmod -R a+w /workspace
-
 # Install nbdev and add nbdev template to workspace
 RUN conda install --name pytorch-py${PYTHON_VERSION} nbdev -c fastai
 RUN git clone https://github.com/fastai/nbdev_template.git /workspace/nbdev_template
+
+EXPOSE 8888
+RUN chmod -R a+w /workspace
 
 ENV JUPYTER_COMMAND "jupyter lab --ip=0.0.0.0 --port=8888 --no-browser --allow-root --ServerApp.token='' --ServerApp.terminado_settings={'shell_command':['bash']}"
 CMD ${JUPYTER_COMMAND}
