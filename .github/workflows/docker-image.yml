@@ -33,9 +33,14 @@ jobs:
         env:
           DOCKER_USER: davidelanz
           DOCKER_PASS: ${{ secrets.DOCKER_PASSWORD }}
-        run: docker login -u $DOCKER_USER -p $DOCKER_PASS
-             docker build . --file cpu/Dockerfile --tag davidelanz/jupytorch:cpu
-             docker push davidelanz/jupytorch:cpu
+        run: |
+          docker login -u $DOCKER_USER -p $DOCKER_PASS 
+          &&
+          docker build . 
+            --file cpu/Dockerfile 
+            --tag davidelanz/jupytorch:cpu 
+          &&
+          docker push davidelanz/jupytorch:cpu
 
   BuildPushGPU:
     runs-on: ubuntu-latest
@@ -78,11 +83,13 @@ jobs:
           DOCKER_USER: davidelanz
           DOCKER_PASS: ${{ secrets.DOCKER_PASSWORD }}
         run:  | 
-          docker login -u $DOCKER_USER -p $DOCKER_PASS
-          docker build . \
-            --build-arg CUDA_VERSION=${{ matrix.cuda }}  \
-            --build-arg CUDNN_VERSION=${{ matrix.cudnn }} \
-            --build-arg CUDA_TOOLKIT=${{ matrix.cudatlk }}  \
-            --file gpu/Dockerfile \
-            --tag davidelanz/jupytorch:gpu-cuda${{ matrix.cuda }}-cudnn${{ matrix.cudnn }}
+          docker login -u $DOCKER_USER -p $DOCKER_PASS  
+          &&
+          docker build .
+            --build-arg CUDA_VERSION=${{ matrix.cuda }} 
+            --build-arg CUDNN_VERSION=${{ matrix.cudnn }}
+            --build-arg CUDA_TOOLKIT=${{ matrix.cudatlk }} 
+            --file gpu/Dockerfile
+            --tag davidelanz/jupytorch:gpu-cuda${{ matrix.cuda }}-cudnn${{ matrix.cudnn }} 
+          &&
           docker push davidelanz/jupytorch:gpu-cuda${{ matrix.cuda }}-cudnn${{ matrix.cudnn }}
