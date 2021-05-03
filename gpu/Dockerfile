@@ -11,6 +11,7 @@ ARG PYTORCH_VERSION=1.8.1
 # If you want to re-use it you need to declare it without the value as below:
 ARG CUDA_VERSION
 ARG CUDNN_VERSION
+ARG CUDA_TOOLKIT=CUDA_VERSION
 
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -38,7 +39,7 @@ RUN  /opt/conda/bin/conda install conda-build && \
      /opt/conda/bin/conda create -y --name pytorch-py${PYTHON_VERSION} python=${PYTHON_VERSION} numpy pyyaml scipy ipython mkl && \
      /opt/conda/bin/conda clean -ya
 ENV PATH opt/conda/bin:/opt/conda/envs/pytorch-py${PYTHON_VERSION}/bin:$PATH
-RUN conda install --name pytorch-py${PYTHON_VERSION} pytorch=${PYTORCH_VERSION} torchvision torchaudio cudatoolkit=${CUDA_VERSION} -c pytorch -c nvidia
+RUN conda install --name pytorch-py${PYTHON_VERSION} pytorch=${PYTORCH_VERSION} torchvision torchaudio cudatoolkit=${CUDA_TOOLKIT} -c pytorch -c nvidia
 
 # Add env as default env activated by bash
 RUN echo "source /opt/conda/bin/activate" >> ~/.bashrc && \

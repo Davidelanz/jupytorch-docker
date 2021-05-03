@@ -3,9 +3,10 @@
 [![Docker Image CI](https://github.com/Davidelanz/jupytorch-docker/actions/workflows/docker-image.yml/badge.svg)](https://github.com/Davidelanz/jupytorch-docker/actions/workflows/docker-image.yml)
 [![](https://img.shields.io/badge/Ubuntu-18.04-orange)](https://releases.ubuntu.com/20.04/)
 [![](https://img.shields.io/badge/Python-3.7-yellow)](https://www.python.org/downloads/release/python-370/)
+[![](https://img.shields.io/badge/MiniConda-yes-green)](https://docs.conda.io/en/latest/miniconda.html)
 [![](https://img.shields.io/badge/PyTorch-1.8.1-green)](https://github.com/pytorch/pytorch/releases/tag/v1.8.1)
 [![](https://img.shields.io/badge/CPU_only-yes-green)](#)
-[![](https://img.shields.io/badge/CUDA-10.0→11.3-green)](https://hub.docker.com/r/nvidia/cuda)
+[![](https://img.shields.io/badge/CUDA-10.1|10.2|11.1-green)](https://hub.docker.com/r/nvidia/cuda)
 
 Repository for the [davidelanz/jupytorch](https://hub.docker.com/r/davidelanz/jupytorch) docker image. 
 It provides a quick set up for Pytorch and Jupyter Lab with Docker.
@@ -24,6 +25,18 @@ docker run -p CONTANER_PORT:8888 -v EXTERNAL_FOLDER:/workspace --name CONTAINER_
 ```
 
 Your workspace will be available at [localhost:CONTANER_PORT](localhost:CONTANER_PORT).
+
+Available tags:
+- ``cpu``
+- ``gpu-cuda10.1-cudnn7``
+- ``gpu-cuda10.1-cudnn8``
+- ``gpu-cuda10.2-cudnn7``
+- ``gpu-cuda10.2-cudnn8``
+- ``gpu-cuda11.1.1-cudnn8``
+<!--
+- ``gpu-cuda11.2.2-cudnn8`` (experimental)
+- ``gpu-cuda11.3.0-cudnn8`` (experimental)
+-->
 
 ## Build Custom CPU version from GitHub
 
