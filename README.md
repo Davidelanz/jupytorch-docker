@@ -15,7 +15,7 @@ It provides a quick set up for Pytorch and Jupyter Lab with Docker.
 |---|---|
 | [![](https://raw.githubusercontent.com/Davidelanz/jupytorch-docker/master/.docs/nbdev.png)](https://nbdev.fast.ai/) |  The image supports [nbdev](https://nbdev.fast.ai/) paradigm (by fast.ai), allowing you to develop python libraries directly in Jupyter Notebooks |
 | [![](https://raw.githubusercontent.com/Davidelanz/jupytorch-docker/master/.docs/formatter.png)](https://jupyterlab-code-formatter.readthedocs.io/) | The image comes with [jupyterlab_code_formatter](https://jupyterlab-code-formatter.readthedocs.io/) already installed |
-| [![](https://raw.githubusercontent.com/Davidelanz/jupytorch-docker/master/.docs/lsp-integration.png)](https://jupyterlab-lsp.readthedocs.io/en/latest/index.html) | The image comes with [LSP Python language server for JupyterLab](https://jupyterlab-lsp.readthedocs.io/en/latest/index.html) already installed (**Note**: you still have to [configure it](https://jupyterlab-lsp.readthedocs.io/en/latest/Configuring.html)) |
+| [![](https://raw.githubusercontent.com/Davidelanz/jupytorch-docker/master/.docs/lsp-integration.png)](https://jupyterlab-lsp.readthedocs.io/en/latest/index.html) | The image comes with [LSP Python language server for JupyterLab](https://jupyterlab-lsp.readthedocs.io/en/latest/index.html) already installed |
 
 ## Mount from DockerHub
 
