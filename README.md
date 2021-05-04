@@ -25,15 +25,15 @@ then mount the container (the image exposes JupyterLab on the ``8888`` port):
 docker run -p CONTANER_PORT:8888 -v EXTERNAL_FOLDER:/workspace --name CONTAINER_NAME davidelanz/jupytorch:TAG
 ```
 
-Your workspace will be available at [localhost:CONTANER_PORT](localhost:CONTANER_PORT).
+Your workspace will be available at [localhost:CONTANER_PORT](http://localhost:CONTANER_PORT).
 
-Available tags:
-- ``cpu``
-- ``gpu-cuda10.1-cudnn7``
-- ``gpu-cuda10.1-cudnn8``
-- ``gpu-cuda10.2-cudnn7``
-- ``gpu-cuda10.2-cudnn8``
-- ``gpu-cuda11.1.1-cudnn8``
+Supported tags:
+- ``docker pull davidelanz/jupytorch:cpu``
+- ``docker pull davidelanz/jupytorch:gpu-cuda10.1-cudnn7``
+- ``docker pull davidelanz/jupytorch:gpu-cuda10.1-cudnn8``
+- ``docker pull davidelanz/jupytorch:gpu-cuda10.2-cudnn7``
+- ``docker pull davidelanz/jupytorch:gpu-cuda10.2-cudnn8``
+- ``docker pull davidelanz/jupytorch:gpu-cuda11.1.1-cudnn8``
 
 ## Build Custom CPU version from GitHub
 
@@ -52,8 +52,7 @@ $ docker build . -t jupytorch/cpu \
 
 ## Build Custom GPU version from GitHub
 
-The GPU version is built on the [``nvidia/cuda``](https://hub.docker.com/r/nvidia/cuda/) docker 
-images (``devel``, ``ubuntu18.04`` tags).
+The CPU version is directly built on the ``ubuntu18.04`` docker image.
 
 ```
 $ git clone https://github.com/davidelanz/jupytorch-docker
