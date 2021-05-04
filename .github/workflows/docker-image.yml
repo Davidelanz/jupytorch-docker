@@ -46,30 +46,30 @@ jobs:
       matrix:
         include:
           # CUDA 10
-          - cuda: '10.1'
-            cudnn: '7'
-            cudatlk: '10.1'
-          - cuda: '10.1'
-            cudnn: '8'
-            cudatlk: '10.1'
-          - cuda: '10.2'
-            cudnn: '7'
-            cudatlk: '10.2'
-          - cuda: '10.2'
-            cudnn: '8'
-            cudatlk: '10.2'
+          - cuda: "10.1"
+            cudnn: "7"
+            cudatlk: "10.1"
+          - cuda: "10.1"
+            cudnn: "8"
+            cudatlk: "10.1"
+          - cuda: "10.2"
+            cudnn: "7"
+            cudatlk: "10.2"
+          - cuda: "10.2"
+            cudnn: "8"
+            cudatlk: "10.2"
           # CUDA 11
-          - cuda: '11.1.1'
-            cudnn: '8'
-            cudatlk: '11.1'
-          - cuda: '11.2.2'
-            cudnn: '8'
-            cudatlk: '11.1'
-            experimental: true
-          - cuda: '11.3.0'
-            cudnn: '8'
-            cudatlk: '11.1'
-            experimental: true
+          - cuda: "11.1.1"
+            cudnn: "8"
+            cudatlk: "11.1"
+          # - cuda: '11.2.2'
+          #   cudnn: '8'
+          #   cudatlk: '11.1'
+          #   experimental: true
+          # - cuda: '11.3.0'
+          #   cudnn: '8'
+          #   cudatlk: '11.1'
+          #   experimental: true
     steps:
       - name: git checkout
         uses: actions/checkout@v2
@@ -78,7 +78,7 @@ jobs:
         env:
           DOCKER_USER: davidelanz
           DOCKER_PASS: ${{ secrets.DOCKER_PASSWORD }}
-        run:  | 
+        run: |
           docker login -u $DOCKER_USER -p $DOCKER_PASS && \
           docker build . --build-arg CUDA_VERSION=${{ matrix.cuda }} --build-arg CUDNN_VERSION=${{ matrix.cudnn }} --build-arg CUDA_TOOLKIT=${{ matrix.cudatlk }} --file gpu/Dockerfile --tag davidelanz/jupytorch:gpu-cuda${{ matrix.cuda }}-cudnn${{ matrix.cudnn }} && \
           docker push davidelanz/jupytorch:gpu-cuda${{ matrix.cuda }}-cudnn${{ matrix.cudnn }}
