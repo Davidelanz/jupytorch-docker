@@ -54,8 +54,10 @@ RUN /opt/conda/envs/pytorch-py${PYTHON_VERSION}/bin/pip install easydict ffmpy i
 # Install Jupyter and Node.js (for jupyter extensions)
 RUN conda install --name pytorch-py${PYTHON_VERSION} --yes ipython notebook jupyter jupyterlab
 RUN conda install --name pytorch-py${PYTHON_VERSION} nodejs -c conda-forge --repodata-fn=repodata.json
-# Install jupyterlab_code_formatter
+# Install code formatter
 RUN conda install --name pytorch-py${PYTHON_VERSION} jupyterlab_code_formatter black isort -c conda-forge 
+# Install language server
+RUN conda install --name pytorch-py${PYTHON_VERSION} jupyterlab-lsp jupyter-lsp-python -c conda-forge
 
 # Install nbdev and add nbdev template to workspace
 RUN conda install --name pytorch-py${PYTHON_VERSION} nbdev -c fastai
