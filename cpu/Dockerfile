@@ -52,12 +52,13 @@ RUN conda install --name pytorch-py${PYTHON_VERSION} lxml -c anaconda
 RUN /opt/conda/envs/pytorch-py${PYTHON_VERSION}/bin/pip install easydict ffmpy imutils requests flask onnx seaborn pandas
 
 # Install Jupyter and Node.js (for jupyter extensions)
-RUN conda install --name pytorch-py${PYTHON_VERSION} --yes ipython notebook jupyter jupyterlab
+RUN conda install --name pytorch-py${PYTHON_VERSION} --yes ipython notebook jupyter jupyterlab ipywidgets
 RUN conda install --name pytorch-py${PYTHON_VERSION} nodejs -c conda-forge --repodata-fn=repodata.json
 # Install code formatter
 RUN conda install --name pytorch-py${PYTHON_VERSION} jupyterlab_code_formatter black isort -c conda-forge 
-# Install language server
-RUN conda install --name pytorch-py${PYTHON_VERSION} jupyterlab-lsp jupyter-lsp-python -c conda-forge
+# Install language server (WORKS WITH JEDI >=0.17.2 <0.18.0)
+RUN conda install --name pytorch-py${PYTHON_VERSION} jedi=0.17.2
+RUN conda install --name pytorch-py${PYTHON_VERSION} python-language-server jupyterlab-lsp jupyter-lsp-python -c conda-forge
 
 # Install nbdev and add nbdev template to workspace
 RUN conda install --name pytorch-py${PYTHON_VERSION} nbdev -c fastai
