@@ -1,7 +1,7 @@
 ARG CUDA_VERSION=10.1
 ARG CUDNN_VERSION=7
-#FROM nvidia/cuda:${CUDA_VERSION}-cudnn${CUDNN_VERSION}-devel-ubuntu18.04
-FROM ubuntu:18.04
+#FROM ubuntu:18.04
+FROM nvidia/cuda:${CUDA_VERSION}-cudnn${CUDNN_VERSION}-base-ubuntu18.04
 
 ARG PYTHON_VERSION=3.7
 # To decide which pytorch and cuda version, please checkout this link:
