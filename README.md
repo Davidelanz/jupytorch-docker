@@ -52,7 +52,7 @@ $ docker build . -t jupytorch/cpu \
 
 ## Build Custom GPU version from GitHub
 
-The CPU version is directly built on the ``ubuntu18.04`` docker image.
+The GPU version is directly built on the ``nvidia/cuda:{CUDA_VERSION}-cudnn{CUDNN_VERSION}-runtime-ubuntu18.04`` docker image.
 
 ```
 $ git clone https://github.com/davidelanz/jupytorch-docker
