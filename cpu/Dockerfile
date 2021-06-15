@@ -58,7 +58,7 @@ RUN conda install --name pytorch-py${PYTHON_VERSION} nodejs -c conda-forge --rep
 RUN conda install --name pytorch-py${PYTHON_VERSION} jupyterlab_code_formatter black isort -c conda-forge 
 # Install language server (WORKS WITH JEDI >=0.17.2 <0.18.0)
 RUN conda install --name pytorch-py${PYTHON_VERSION} jedi=0.17.2
-RUN conda install --name pytorch-py${PYTHON_VERSION} python-language-server jupyterlab-lsp jupyter-lsp-python -c conda-forge
+RUN conda install --name pytorch-py${PYTHON_VERSION} python-language-server jedi-language-server jupyterlab-lsp jupyter-lsp-python -c conda-forge
 
 # Install nbdev and add nbdev template to workspace
 RUN conda install --name pytorch-py${PYTHON_VERSION} nbdev -c fastai
